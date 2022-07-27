@@ -4,9 +4,10 @@
 - name: 创建存放安装包文件
   shell: mkdir -p /files/mysql  #创建mysql包目录
 - name: 导入安装包
-  copy: src=mysql-5.5.32-linux2.6-x86_64.tar.gz dest=/files/mysql backup=yes
+  copy: src=/package/mysql-5.5.32-linux2.6-x86_64.tar.gz dest=/files/mysql backup=yes
   register: cp_mysql
 - debug: var=cp_mysql
+
 - name: 安装mysql
   script: installmysql.sh
   register: in_mysql_register

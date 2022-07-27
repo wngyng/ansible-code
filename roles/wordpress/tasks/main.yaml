@@ -1,1 +1,5 @@
-##
+---
+- name: ping
+  ping:
+- name: mysql创建账户权限
+  shell: 

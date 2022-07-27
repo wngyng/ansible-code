@@ -8,24 +8,17 @@
     src: "{{ item }}"
     dest: /files/php
     backup: yes
-  with_items: ["libiconv-1.14.tar.gz", "php-5.3.28.tar.gz"]
-#  register: cp_php
-#- debug: var=cp_php
+  with_items: ["/package/libiconv-1.14.tar.gz", "/package/php-5.3.28.tar.gz"]
+  register: cp_php
+- debug: var=cp_php
 
-# - name: 安装php
-#   script: installphp.sh
-#   notify: start_php
-#   register: in_php_register
-# - debug: var=in_php_register
-# - meta: flush_handlers
-
-# - name: 传递安装情况
-#   shell: cat php.log
-#   register: plog
-# - debug: var=plog
+- name: 安装php
+  script: installphp.sh
+  register: in_php_register
+- debug: var=in_php_register
 
 - name: 传配置文件
   template: src=php-fpm-conf.j2 dest=/usr/local/php/etc/php-fpm.conf
-  notify: reload_php
+  notify: start_php
   register: reg_php
 - debug: var=reg_php

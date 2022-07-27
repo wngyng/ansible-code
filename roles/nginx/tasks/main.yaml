@@ -5,14 +5,14 @@
   shell: mkdir -p /files/nginx #创建nginx包目录
 
 - name: 导入安装包
-  copy: src=nginx-1.10.2.tar.gz dest=/files/nginx backup=yes
+  copy: src=/package/nginx-1.10.2.tar.gz dest=/files/nginx backup=yes
   register: cp_nginx
 - debug: var=cp_nginx
 
-# - name: 安装nginx
-#   script: installnginx.sh
-#   register: nginx_re
-# - debug: var=nginx_re
+- name: 安装nginx
+  script: installnginx.sh
+  register: nginx_re
+- debug: var=nginx_re
 
 - name: 传 nginx.conf
   template: src=nginxconf.j2 dest=/usr/local/nginx/conf/nginx.conf backup=yes
