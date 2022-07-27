@@ -1,0 +1,7 @@
+---
+- hosts: an-nginx01
+  gather_facts: True
+  roles:
+   - nginx
+   - php
+ #   - mysql
