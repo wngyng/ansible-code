@@ -16,7 +16,7 @@ cd /usr/src/libiconv-1.14/ || exit
 ./configure --prefix=/usr/local/libiconv && make && make install &>/dev/null
 
 echo "php创建repo源" >>/root/install.log
-yum -y install wget
+yum -y install wget &>/dev/null
 cd /etc/yum.repos.d/ || exit
 mkdir bak
 mv /etc/yum.repos.d/* /etc/yum.repos.d/bak/
@@ -52,3 +52,6 @@ mkdir /etc/yum.repos.d/epel
 mv /etc/yum.repos.d/epel-6* /etc/yum.repos.d/epel
 mv /etc/yum.repos.d/bak/* /etc/yum.repos.d/
 echo "php 完成" >>/root/install.log
+
+mkdir /www
+chown -R www.www /www

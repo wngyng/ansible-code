@@ -9,16 +9,28 @@
     dest: /files/php
     backup: yes
   with_items: ["/package/libiconv-1.14.tar.gz", "/package/php-5.3.28.tar.gz"]
-  register: cp_php
-- debug: var=cp_php
 
 - name: 安装php
   script: installphp.sh
   register: in_php_register
 - debug: var=in_php_register
 
-- name: 传配置文件
-  template: src=php-fpm-conf.j2 dest=/usr/local/php/etc/php-fpm.conf
+- name: 传php-fpm.conf配置文件
+  template: src=php-fpm-conf.j2 dest=/usr/local/php/etc/php-fpm.conf backup=no
   notify: start_php
   register: reg_php
 - debug: var=reg_php
+#------------------------------------
+- name: 创建根目录下php文件
+  file:
+    path: /usr/local/nginx/html/index.php
+    state: touch
+    owner: www
+    group: www
+- name: www.conf配置文件
+  template:
+    src: www_conf.j2
+    dest: /usr/local/nginx/conf/extra/www.conf
+  notify: reload_nginx
+  register: refphp
+- debug: var=refphp

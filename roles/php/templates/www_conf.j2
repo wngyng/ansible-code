@@ -1,0 +1,20 @@
+server {
+
+   {% if PORT %}
+    listen      {{ PORT }};
+    {% else %}
+    listen       80;
+    {% endif %}
+
+    server_name  localhost;
+        root /www;        #文件存放位置
+    location / {
+  
+            index  index.html index.htm ;
+    }   
+    location ~ .*\.(php|php5)?$ {
+
+        fastcgi_pass    {{ ansible_all_ipv4_addresses[0] }}:9000;
+        fastcgi_index   index.php;
+        include     fastcgi.conf;     
+}}

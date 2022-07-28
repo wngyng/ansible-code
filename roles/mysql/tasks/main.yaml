@@ -17,3 +17,8 @@
   shell: ss -antup |grep mysqld
   register: my_rq
 - debug: var=my_rq
+
+- name: 创建WordPress账户
+  script: createwordpress.sh
+  register: crwdpr
+- debug: var=crwdpr

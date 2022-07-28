@@ -13,7 +13,7 @@
   script: installnginx.sh
   register: nginx_re
 - debug: var=nginx_re
-
+#------------------------------------------
 - name: 传 nginx.conf
   template: src=nginxconf.j2 dest=/usr/local/nginx/conf/nginx.conf backup=yes
   register: cp_ngcn
