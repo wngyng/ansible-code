@@ -1,0 +1,24 @@
+---
+- name: ping服务器
+  ping:
+- name: 创建存放安装包文件
+  shell: mkdir -p /files/php #创建mysql包目录
+- name: 导入安装包
+  copy:
+    src: "{{ item }}"
+    dest: /files/php
+    backup: yes
+  with_items: ["/package/libiconv-1.14.tar.gz", "/package/php-5.3.28.tar.gz"]
+  register: cp_php
+- debug: var=cp_php
+
+- name: 安装php
+  script: installphp.sh
+  register: in_php_register
+- debug: var=in_php_register
+
+- name: 传配置文件
+  template: src=php-fpm-conf.j2 dest=/usr/local/php/etc/php-fpm.conf
+  notify: start_php
+  register: reg_php
+- debug: var=reg_php

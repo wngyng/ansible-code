@@ -1,0 +1,9 @@
+---
+- name: start_php       #定义handlers的动作类型
+  shell: /usr/local/php/sbin/php-fpm 
+- name: stop_php       #定义handlers的动作类型
+  shell: kill -INT `cat /usr/local/php/var/run/php-fpm.pid`  
+- name: reload_php    #定义handlers的动作类型
+  shell: kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+
+
