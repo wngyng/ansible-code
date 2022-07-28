@@ -2,9 +2,9 @@
 - name: ping服务器
   ping:
 - name: 创建存放安装包文件
-  shell: mkdir -p /files/mysql  #创建mysql包目录
+  shell: mkdir -p /files/mysql #创建mysql包目录
 - name: 导入安装包
-  copy: src=/package/mysql-5.5.32-linux2.6-x86_64.tar.gz dest=/files/mysql backup=yes
+  copy: src=/package/mysql-5.5.32-linux2.6-x86_64.tar.gz dest=/files/mysql backup=no
   register: cp_mysql
 - debug: var=cp_mysql
 
@@ -17,3 +17,8 @@
   shell: ss -antup |grep mysqld
   register: my_rq
 - debug: var=my_rq
+
+- name: 创建WordPress账户
+  script: createwordpress.sh
+  register: crwdpr
+- debug: var=crwdpr

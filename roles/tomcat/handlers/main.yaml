@@ -1,0 +1,5 @@
+---
+- name: start_tomcat       #定义handlers的动作类型
+  shell: /usr/local/tomcat/bin/startup.sh 
+- name: stop_tomcat
+  shell: ps -fe | grep "/usr/local/tomcat" | grep -v grep | tr -s " "|cut -d" " -f2 | xargs kill -9

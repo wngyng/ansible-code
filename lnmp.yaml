@@ -4,11 +4,14 @@
 #   roles:
 #     - mysql
 
-- hosts: an-nginx01
+# - hosts: nginx
+#   gather_facts: True
+#   roles:
+#     - nginx
+#     - php
+#     - wordpress
+
+- hosts: tomcat
   gather_facts: True
   roles:
-    - nginx
-    - php
-# - wordpress
-
-
+   - tomcat

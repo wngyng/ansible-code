@@ -20,10 +20,6 @@ make install &>/dev/null
 echo "nginx编译完成" >>/root/install.log
 
 mkdir -p /usr/local/nginx/conf/extra
-mkdir -p /var/www/html/blogcom
-mkdir -p /www/html/blogcom
-chown -R www.www /www
-echo "html php" >/www/index.php #创建测试文件
-/usr/local/nginx/sbin/nginx
+/usr/local/nginx/sbin/nginx #开启
 echo "nginx启动完成" >>/root/install.log
 exit 0

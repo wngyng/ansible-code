@@ -1,5 +1,21 @@
 ---
 - name: ping
   ping:
-- name: mysql创建账户权限
-  shell: 
+    
+- name: 晴空目录
+  shell: rm -rf /www/* 
+
+- name: 导入wordpress
+  copy: 
+    src: /package/wordpress-4.7.4-zh_CN.tar.gz
+    dest: /www/
+    backup: yes
+- name: 解压缩
+  shell: tar xf /www/wordpress-4.7.4-zh_CN.tar.gz -C /www/
+- name:  复制文件到目录
+  shell: mv /www/wordpress/* /www/
+- shell: chown -R www.www /www
+- name: 查看安装目录
+  shell: ls -l
+  register: reword
+- debug: var=reword

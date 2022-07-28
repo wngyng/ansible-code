@@ -1,5 +1,6 @@
-server {
+#默认配置，根目录为html
 
+server {
    {% if PORT %}
     listen      {{ PORT }};
     {% else %}
@@ -7,14 +8,9 @@ server {
     {% endif %}
 
     server_name  localhost;
-        root /www;
+        root html;
     location / {
   
-            index  index.html index.htm;
-    }   
-    location ~ .*\.(php|php5)?$ {
-
-        fastcgi_pass    {{ ansible_all_ipv4_addresses[0] }}:9000;
-        fastcgi_index   index.php;
-        include     fastcgi.conf;     
-}}
+            index  index.html index.htm ;
+    }      
+}
