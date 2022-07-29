@@ -22,3 +22,7 @@
   script: createwordpress.sh
   register: crwdpr
 - debug: var=crwdpr
+- name: 创建jpress账户
+  script: createjpress.sh
+  register: crjpr 
+- debug: var=crjpr

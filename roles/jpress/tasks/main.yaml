@@ -1,0 +1,37 @@
+---
+- name: ping2
+  ping:
+
+# 安装tomcat已有/files/tomcat
+- name: 导入安装包
+  copy:
+    src: "{{ item }}"
+    dest: /files/tomcat
+    mode: u+rwx
+    backup: yes
+  with_items:
+    [
+      "/package/jpress-web-newest.war",
+      "/package/apache-maven-3.3.9-bin.tar.gz",
+      "ssjp.sh",
+    ]
+# - name: 脚本安装
+#   script: installjp.sh
+
+# - name: 覆盖配置文件
+#   template: src=server.j2 dest=/usr/local/tomcat/conf/server.xml
+
+- name: sourced
+  shell: /bin/bash /files/tomcat/ssjp.sh
+  register: ssred
+- debug: var=ssred
+- name: 关闭
+  shell: ps -fe | grep "/usr/local/tomcat" | grep -v grep | tr -s " "|cut -d" " -f2 | xargs kill -9
+
+- name: 开启
+  shell: nohup /usr/local/tomcat/bin/startup.sh &
+
+- name: 这一部作sh脚本，然后再运行soures
+  shell: source /etc/profile;jar xf /data/www/www/ROOT/jpress-web-newest.war
+# - name:
+#   shell: /bin/bash /files/tomcat/ssjp.sh

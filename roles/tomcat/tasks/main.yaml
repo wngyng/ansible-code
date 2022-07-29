@@ -1,32 +1,26 @@
 # tomcat
 ---
-# - name: ping
-#   ping:
-# - name: 创建存放安装包文件
-#   file:
-#     path: /files/tomcat
-#     state: directory
-# - name: 导入安装包
-#   copy:
-#     src: "{{ item }}"
-#     dest: /files/tomcat
-#     backup: yes
-#   with_items:
-#     [
-#       "/package/jdk-8u60-linux-x64.tar.gz",
-#       "/package/apache-tomcat-8.0.27.tar.gz",
-#     ]
-# - name: 复制sh文件
-#   copy:
-#     src: installcat.sh
-#     dest: /files/tomcat
-# - name: 安装tomcat
-#   script: installcat.sh
+- name: ping2
+  ping:
+- name: 创建存放安装包文件
+  file:
+    path: /files/tomcat
+    state: directory
+- name: 导入安装包
+  copy:
+    src: "{{ item }}"
+    dest: /files/tomcat
+    backup: yes
+  with_items:
+    [
+      "/package/apache-tomcat-8.0.27.tar.gz",
+      "/package/jdk-8u60-linux-x64.tar.gz",
+      "ss.sh",
+    ]
+- name: 安装
+  script: installcat.sh
 
-# - name: dd
-#   copy: src=zx.sh dest=/files/tomcat/
-- name: zx
-  shell: /bin/bash /files/tomcat/zx.sh
-  notify: start_tomcat
+- name: 执行启动
+  shell: /bin/bash /files/tomcat/ss.sh
   register: reg_p
 - debug: var=reg_p

@@ -7,7 +7,9 @@ php-5.3.28.tar.gz
 wordpress-4.7.4-zh_CN.tar.gz
 jdk-8u60-linux-x64.tar.gz
 apache-tomcat-8.0.27.tar.gz
-
+### jpress
+apache-maven-3.3.9-bin.tar.gz
+jpress-web-newest.war 
 
 # hosts主机：
 [nginx]
