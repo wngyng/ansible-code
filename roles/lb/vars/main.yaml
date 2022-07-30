@@ -1,0 +1,7 @@
+#服务器池
+Server_Pool:
+  - server 192.168.200.178:80 weight=1;
+  - server 192.168.200.179:80 weight=1;
+
+#代理网址
+Server_Name: www.wang.com

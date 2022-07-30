@@ -17,7 +17,7 @@ an-nginx01
 an-nginx02 
 
 [tomcat]
-an-tomcat01      # 做免秘钥登录
+an-tomcat01   地址：192.168.200.189:8080   # 做免秘钥登录
 
 [mysql]
 an-mysql

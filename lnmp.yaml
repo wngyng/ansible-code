@@ -11,8 +11,14 @@
 #     - php
 #     - wordpress
 
-- hosts: tomcat
+# - hosts: tomcat
+#   gather_facts: True
+#   roles:
+#     - tomcat
+#     - jpress
+
+#反项代理
+- hosts: lb
   gather_facts: True
   roles:
-  #  - tomcat
-    - jpress
+    - lb

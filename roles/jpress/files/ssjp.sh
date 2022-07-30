@@ -1,6 +1,6 @@
 #!/bin/bash
 #执行配置，并开启
-
 source /etc/profile
+
 
 

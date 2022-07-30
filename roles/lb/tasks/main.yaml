@@ -1,0 +1,26 @@
+---
+- name: ping
+  ping:
+- name: 创建存放安装包文件
+  shell: mkdir -p /files/nginx #创建nginx包目录
+
+- name: 导入安装包
+  copy: src=/package/nginx-1.10.2.tar.gz dest=/files/nginx backup=yes
+  register: cp_nginx
+- debug: var=cp_nginx
+
+- name: 安装nginx,并初始化
+  script: installlb.sh
+  register: nginx_re
+- debug: var=nginx_re
+#------------------------------------------
+- name: 传 nginx.conf
+  template: src=nconf.j2 dest=/usr/local/nginx/conf/nginx.conf backup=yes
+  notify: reload_nginx
+  register: cp_ngcn
+- debug: var=cp_ngcn
+
+- name: 修改host文件
+  shell: echo "`hostname -I | awk '{print $1}'` www.wang.com" >> /etc/hosts
+
+
