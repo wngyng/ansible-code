@@ -24,3 +24,18 @@ echo "$(date '+%D %T') nginx make install完成" >>/root/install.log
  /usr/local/nginx/sbin/nginx #开启
 # echo "nginx启动完成" >>/root/install.log
 # exit 0
+
+#----安装keepalived--------
+yum install -y libnfnetlink-devel zlib zlib-devel gcc gcc-c++ openssl-devel libnl-devel popt-devel ipvsadm &>/dev/null
+tar -xf /files/nginx/keepalived-2.0.10.tar.gz -C /usr/src/ &>/dev/null
+cd /usr/src/keepalived-2.0.10 || exit
+./configure --prefix=/usr/local/keepalived
+make && make install &>/dev/null
+cp /usr/local/keepalived/etc/sysconfig/keepalived /etc/sysconfig/keepalived
+cp /usr/local/keepalived/sbin/keepalived /usr/sbin/keepalived
+cp /usr/src/keepalived-2.0.10/keepalived/etc/init.d/keepalived /etc/init.d/keepalived
+mkdir /etc/keepalived
+cp /usr/local/keepalived/etc/keepalived/keepalived.conf /etc/keepalived/
+chkconfig --add keepalived    #添加系统服务
+chkconfig keepalived on 
+systemctl start keepalived

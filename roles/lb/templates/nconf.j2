@@ -1,6 +1,6 @@
-worker_processes  1;
+worker_processes  2;
 events {
-    worker_connections  1024;
+    worker_connections  102400;
 }
 http {
     include       mime.types;
@@ -20,5 +20,12 @@ http {
         server_name  {{ Server_Name }};
         location / {
         proxy_pass http://www_server_pools;
-} } 
+        }
+        location ~ .* {
+            proxy_pass  http://www_server_pools;
+            proxy_set_header  Host $http_host;
+            proxy_set_header  X-Real-IP $remote_addr;
+            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+ } 
 }

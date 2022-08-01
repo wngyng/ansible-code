@@ -5,7 +5,15 @@
   shell: mkdir -p /files/nginx #创建nginx包目录
 
 - name: 导入安装包
-  copy: src=/package/nginx-1.10.2.tar.gz dest=/files/nginx backup=yes
+  copy:
+    src: "{{ item }}"
+    dest: /files/nginx
+    backup: yes
+  with_items:
+    [
+      "/package/nginx-1.10.2.tar.gz",
+      "/package/keepalived-2.0.10.tar.gz",
+    ]
   register: cp_nginx
 - debug: var=cp_nginx
 
@@ -22,5 +30,8 @@
 
 - name: 修改host文件
   shell: echo "`hostname -I | awk '{print $1}'` www.wang.com" >> /etc/hosts
-
+- name: 复制启动文件
+  copy: src=nginx.service dest=/usr/lib/systemd/nginx.service
+  
+#-----------安装keepalived---------------
 
