@@ -1,5 +1,11 @@
-# ansible-code
-安装包位置：/package
+# ansible 安装
+
+说明：本安装是基于centos7系统
+
+## 一 安装包
+位置：/package
+内容：
+### mysql/nginx/php/wordpress/tomcat
 libiconv-1.14.tar.gz 
 mysql-5.5.32-linux2.6-x86_64.tar.gz  
 nginx-1.10.2.tar.gz  
@@ -7,6 +13,7 @@ php-5.3.28.tar.gz
 wordpress-4.7.4-zh_CN.tar.gz
 jdk-8u60-linux-x64.tar.gz
 apache-tomcat-8.0.27.tar.gz
+
 ### jpress
 apache-maven-3.3.9-bin.tar.gz
 jpress-web-newest.war 
@@ -16,7 +23,7 @@ keepalived-2.0.10.tar.gz
 
 
 
-# hosts主机：
+## 二 hosts主机：
 [nginx]   #开两个网段200和100
 
 an-nginx01      
@@ -34,7 +41,7 @@ an-lb01
 an-lb02
 
 
-# 角色备注
+# 三 角色备注
 ## roles/nginx
 nginx.conf 自动添加：include extra/www.conf;并单独创建了extra目录和www.conf文件
 网页根目录在默认html里

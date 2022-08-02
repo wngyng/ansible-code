@@ -1,0 +1,24 @@
+---
+# - hosts: mysql
+#   gather_facts: True
+#   roles:
+#     - mysql
+
+# - hosts: nginx
+#   gather_facts: True
+#   roles:
+#     - nginx
+#     - php
+#     - wordpress
+
+# - hosts: tomcat
+#   gather_facts: True
+#   roles:
+#     - tomcat
+#     - jpress
+
+#反项代理
+- hosts: lb
+  gather_facts: True
+  roles:
+    - lb
